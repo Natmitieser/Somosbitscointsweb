@@ -26,6 +26,42 @@ body {
   min-height: 100vh;
 }
 
+/* body.loaded is now handled in inline CSS for performance */
+
+/* Top Loader Line */
+#loader-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background: var(--primary);
+  width: 0%;
+  z-index: 9999;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 15px var(--primary);
+  /* Glow effect */
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 5px;
+  border: 2px solid var(--bg-dark);
+  /* Padding effect */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-hover);
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -63,26 +99,48 @@ ul {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  background: rgba(10,10,10,0.95);
+  padding: 15px 40px;
+  /* Wider padding like reference */
+  background: var(--primary);
+  /* Orange Background */
   position: sticky;
   top: 0;
   z-index: 100;
-  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(247, 147, 26, 0.2);
+  width: 100%;
+  max-width: 100%;
+  /* Full width strip */
 }
+
+/* Force Navbar to be full width strip, override container for this specific element if needed, 
+   but since it has 'container' class, we might need to wrap it. 
+   Actually, the reference has a full orange strip. */
 
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-weight: 700;
-  font-size: 1.5rem;
-  letter-spacing: -0.5px;
+  height: 60px;
+  /* Fixed height for navbar consistency */
 }
 
 .logo img {
-  height: 40px;
+  height: 100%;
+  width: auto;
+  /* Removed border and radius for transparent cut-out look */
+  transition: transform 0.3s;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  /* Light shadow for contrast */
+}
+
+.logo:hover img {
+  transform: scale(1.05) rotate(-2deg);
+}
+
+/* Hide old text elements if any remain or ensure they don't interfere */
+.logo i,
+.logo span,
+.logo div {
+  display: none !important;
 }
 
 .nav-links {
@@ -91,28 +149,42 @@ ul {
 }
 
 .nav-links a {
-  font-weight: 500;
-  color: var(--text-muted);
+  font-weight: 700;
+  color: black;
+  /* Black text */
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  opacity: 0.8;
 }
 
-.nav-links a:hover, .nav-links a.active {
-  color: var(--primary);
+.nav-links a:hover,
+.nav-links a.active {
+  color: black;
+  opacity: 1;
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .search-btn {
-  background: transparent;
-  border: 1px solid var(--border-color);
-  color: var(--text-main);
-  padding: 8px 16px;
-  border-radius: 20px;
+  background: black;
+  border: none;
+  color: white;
+  /* Contrast button */
+  padding: 10px 24px;
+  border-radius: 4px;
+  /* Square edges like reference */
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.9rem;
 }
 
 .search-btn:hover {
-  border-color: var(--primary);
+  background: #222;
+  transform: translateY(-1px);
 }
 
 /* Buttons */
@@ -120,21 +192,36 @@ ul {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 14px 32px;
+  padding: 16px 32px;
+  /* Larger */
   background: var(--primary);
   color: white;
-  border-radius: 8px;
-  font-weight: 600;
+  border-radius: 4px;
+  /* Squarer */
+  font-weight: 700;
   border: none;
   cursor: pointer;
   font-size: 1rem;
+  text-transform: uppercase;
   transition: all 0.3s ease;
+  letter-spacing: 0.5px;
 }
 
 .btn:hover {
   background: var(--primary-hover);
   transform: translateY(-2px);
   box-shadow: 0 10px 20px rgba(247, 147, 26, 0.2);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: white;
+  color: black;
 }
 
 /* Grid */
@@ -159,13 +246,14 @@ ul {
   border-color: rgba(247, 147, 26, 0.3);
   transform: translateY(-5px);
   background: var(--bg-card-hover);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 .card-thumb {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+  padding-bottom: 56.25%;
+  /* 16:9 Aspect Ratio */
   background: #000;
   overflow: hidden;
 }
@@ -204,7 +292,8 @@ ul {
   width: 24px;
   height: 24px;
   fill: white;
-  margin-left: 4px; /* Optical center */
+  margin-left: 4px;
+  /* Optical center */
 }
 
 .card-thumb:hover .play-icon {
@@ -248,7 +337,7 @@ ul {
 .card-footer {
   margin-top: auto;
   padding-top: 16px;
-  border-top: 1px solid rgba(255,255,255,0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -261,8 +350,9 @@ ul {
   .section-title {
     font-size: 2rem;
   }
-  
+
   .nav-links {
-    display: none; /* Mobile menu todo */
+    display: none;
+    /* Mobile menu todo */
   }
 }

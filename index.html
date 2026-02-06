@@ -3,32 +3,52 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link rel="icon" type="image/png" href="/logo-transparent.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Somos Bitcoin - Aprende sobre Bitcoin</title>
+  <!-- Critical CSS to prevent white flash and handle immediate transition -->
+  <style>
+    html,
+    body {
+      background-color: #0a0a0a;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Smoother, slower transition */
+    body {
+      opacity: 0;
+      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body.loaded {
+      opacity: 1;
+    }
+  </style>
   <!-- Font Awesome for Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
+  <div id="loader-bar"></div>
   <div id="app">
-    <!-- Navbar -->
-    <nav class="navbar container">
-      <a href="/" class="logo">
-        <i class="fa-brands fa-bitcoin" style="color: var(--primary); font-size: 2rem;"></i>
-        <span>SOMOS BITCOIN</span>
-      </a>
-      <div class="nav-links">
-        <a href="/" class="active">Inicio</a>
-        <a href="/library.html">Biblioteca</a>
-        <a href="/community.html">Comunidad</a>
-        <a href="/resources.html">Recursos</a>
-      </div>
-      <a href="/library.html" class="search-btn">
-        <i class="fa-solid fa-search"></i>
-        <span>Buscar</span>
-      </a>
-    </nav>
+    <!-- Navbar (Full Width Strip) -->
+    <div style="background: var(--primary); width: 100%;">
+      <nav class="navbar container" style="background: transparent; box-shadow: none; padding: 20px;">
+        <a href="/" class="logo">
+          <img src="/logo-transparent.png" alt="Somos Bitcoin Logo" />
+        </a>
+        <div class="nav-links">
+          <a href="/" class="active">Home</a>
+          <a href="/library.html">Cursos</a>
+          <a href="/community.html">Comunidad</a>
+          <a href="/resources.html">Recursos</a>
+        </div>
+        <a href="/community.html" class="search-btn">
+          Contact Us
+        </a>
+      </nav>
+    </div>
 
     <!-- Hero Section -->
     <header class="hero section">
@@ -43,11 +63,7 @@
           </p>
           <div style="display: flex; gap: 16px;">
             <a href="/library.html" class="btn">
-              <i class="fa-solid fa-play" style="margin-right: 8px;"></i> Ver Clases
-            </a>
-            <a href="/community.html" class="btn"
-              style="background: transparent; border: 1px solid var(--border-color);">
-              <i class="fa-solid fa-users" style="margin-right: 8px;"></i> Unirse al Grupo
+              VER ÚLTIMA CLASE / ESTRENO
             </a>
           </div>
         </div>
@@ -68,8 +84,10 @@
     <!-- Featured Videos -->
     <section class="section container">
       <div style="display: flex; justify-content: space-between; align-items: end; margin-bottom: 40px;">
-        <h2 class="section-title" style="margin: 0; text-align: left;">Últimos <span
-            style="color: var(--primary);">Videos</span></h2>
+        <div>
+          <h2 class="section-title" style="margin-bottom: 10px; text-align: left;">Últimos Cursos Agregados</h2>
+          <p style="color: var(--text-muted);">Lo más fresco de la comunidad</p>
+        </div>
         <a href="/library.html"
           style="color: var(--primary); font-weight: 600; display: flex; align-items: center; gap: 8px;">
           Ver todos <i class="fa-solid fa-arrow-right"></i>
@@ -88,14 +106,64 @@
     </section>
 
     <!-- Footer -->
-    <footer style="background: #000; padding: 40px 0; border-top: 1px solid #222; margin-top: 80px;">
-      <div class="container" style="text-align: center; color: var(--text-muted);">
-        <div style="margin-bottom: 20px;">
-          <i class="fa-brands fa-bitcoin" style="color: var(--primary); font-size: 2rem;"></i>
+    <footer style="background: var(--primary); padding: 20px 0; margin-top: 80px;">
+      <div class="container"
+        style="display: flex; justify-content: space-between; align-items: center; color: black; font-weight: 700;">
+        <div style="display: flex; gap: 10px;">
+          <a href="/community.html" style="text-decoration: none; color: black;">Redes Sociales</a>
+          <span>|</span>
+          <a href="/community.html" style="text-decoration: none; color: black;">Únete a Somos Bitcoin</a>
         </div>
-        <p>&copy; 2024 Somos Bitcoin. Todos los derechos reservados.</p>
+        <span>&copy; <span id="year">2026</span> Somos Bitcoin</span>
       </div>
     </footer>
+
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // Page Transition Script
+      window.addEventListener('DOMContentLoaded', () => {
+        const loader = document.getElementById('loader-bar');
+
+        // 1. Simulate Load Progress (Smoother)
+        loader.style.width = '30%';
+        setTimeout(() => loader.style.width = '100%', 100); // Direct to 100 smoother
+
+        setTimeout(() => {
+          // 2. Fade In Content (Wait slightly for bar)
+          document.body.classList.add('loaded');
+          // 3. Hide Loader after animation
+          setTimeout(() => loader.style.opacity = '0', 600);
+        }, 400);
+
+        // 4. Link Click Transition (Exit Animation)
+        document.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            if (href && href.startsWith('/') && !href.startsWith('#')) {
+              e.preventDefault();
+              // Restart Loader
+              loader.style.transition = 'width 0s'; // Reset instant
+              loader.style.width = '0%';
+              loader.style.opacity = '1';
+
+              requestAnimationFrame(() => {
+                loader.style.transition = 'width 0.4s ease'; // Smooth fill
+                loader.style.width = '100%';
+              });
+
+              // Fade out page slowly
+              document.body.style.opacity = '0';
+
+              // Navigate after transition matches
+              setTimeout(() => {
+                window.location.href = href;
+              }, 600); // 600ms match transition
+            }
+          });
+        });
+      });
+    </script>
 
   </div>
   <script type="module" src="/src/main.js"></script>

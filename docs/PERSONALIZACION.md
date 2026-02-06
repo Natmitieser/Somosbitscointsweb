@@ -20,6 +20,10 @@ Cambia los códigos HEX (`#...`) para cambiar el tema de toda la web instantáne
 *   **Título Hero (Inicio)**: Archivo `index.html` → Busca `<h1 ...>Aprende sobre...</h1>`.
 *   **Menú de Navegación**: Está repetido en `index.html`, `library.html`, `community.html` y `resources.html`. Si cambias uno, recuerda cambiar los cuatro.
 
-## 🖼️ Imágenes
-*   Las imágenes están vinculadas directamente en el HTML.
-*   Para cambiar la imagen de fondo de la portada, busca en `index.html` la etiqueta `<img>` dentro de `hero-image`.
+## 🖼️ Logo e Imágenes
+*   **Logo**: El sitio usa `public/logo-transparent.png`. Para cambiarlo, simplemente reemplaza ese archivo con tu nuevo logo transparente con el mismo nombre.
+*   **Imágenes**: Las imágenes están vinculadas en el HTML. Busca `<img src="...">` para cambiarlas.
+
+## ⚠️ Cambios Avanzados
+Si quieres mover botones, cambiar el menú o tocar el código fuente:
+👉 Lee: **[GUIA_TECNICA.md](./GUIA_TECNICA.md)**

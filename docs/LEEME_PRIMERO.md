@@ -24,6 +24,12 @@ Aquí tienes los "Manuales de Instrucciones" para cada sección. Abre el archivo
 *   Cambiar el color naranja por otro.
 *   Cambiar textos principales.
 
+## 💻 Para Desarrolladores (Avanzado)
+👉 Lee: **[GUIA_TECNICA.md](./GUIA_TECNICA.md)**
+*   Estructura del proyecto.
+*   Cómo editar el HTML base (Menú y Footer).
+*   Códigos Javascript.
+
 ---
 **Nota Técnica:**
 Todos los archivos de datos están en la carpeta `src/data/`. Siempre que edites uno, guarda el archivo y la web se actualizará sola (si tienes el servidor corriendo).

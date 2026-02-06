@@ -6,6 +6,7 @@ export const videos = [
     url: 'https://www.youtube.com/watch?v=S9JGmA5_unY',
     thumbnail: 'https://img.youtube.com/vi/S9JGmA5_unY/maxresdefault.jpg',
     featured: true,
+    order: 1,
     category: 'Básicos'
   },
   {
@@ -15,6 +16,7 @@ export const videos = [
     url: 'https://www.youtube.com/watch?v=Gc2en3nHxA4',
     thumbnail: 'https://img.youtube.com/vi/Gc2en3nHxA4/maxresdefault.jpg',
     featured: true,
+    order: 2,
     category: 'Básicos'
   },
   {
@@ -23,7 +25,7 @@ export const videos = [
     description: 'La evolución del dinero hasta llegar a las criptomonedas.',
     url: 'https://www.youtube.com/watch?v=mPvtJ_1p-VI',
     thumbnail: 'https://img.youtube.com/vi/mPvtJ_1p-VI/maxresdefault.jpg',
-    featured: true,
+    featured: false,
     category: 'Historia'
   },
   {
@@ -51,6 +53,7 @@ export const videos = [
     url: 'https://www.youtube.com/watch?v=Video6',
     thumbnail: 'https://placehold.co/600x400/1a1a1a/F7931A?text=Mercado',
     featured: true,
+    order: 3,
     category: 'Trading'
   }
 ];

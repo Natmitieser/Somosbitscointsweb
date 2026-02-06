@@ -9,7 +9,10 @@ document.querySelector('#app').innerHTML = `
 const featuredGrid = document.getElementById('featured-grid');
 
 if (featuredGrid) {
-  const featuredVideos = videos.filter(v => v.featured).slice(0, 3);
+  const featuredVideos = videos
+    .filter(v => v.featured)
+    .sort((a, b) => (a.order || 99) - (b.order || 99)) // Sort by order, default to 99 (last)
+    .slice(0, 6); // Limit changed to 6 (2 rows)
 
   featuredGrid.innerHTML = featuredVideos.map(video => createVideoCard(video)).join('');
 }
