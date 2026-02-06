@@ -45,7 +45,23 @@
                 <a href="/community.html" class="search-btn">
                     Contact Us
                 </a>
+                <button class="mobile-menu-btn" id="menu-btn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
             </nav>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div class="mobile-menu-overlay" id="mobile-menu">
+            <a href="/" class="mobile-menu-link">Home</a>
+            <a href="/library.html" class="mobile-menu-link">Cursos</a>
+            <a href="/community.html" class="mobile-menu-link">Comunidad</a>
+            <a href="/resources.html" class="mobile-menu-link">Recursos</a>
+            <br>
+            <button class="mobile-menu-link" style="background:none; border:none; cursor:pointer;"
+                onclick="document.getElementById('mobile-menu').classList.remove('active')">
+                <i class="fa-solid fa-xmark"></i> CERRAR
+            </button>
         </div>
 
         <!-- Library Header -->
