@@ -178,24 +178,23 @@
             }
           });
         });
-      });
 
-      // Mobile Menu Logic
-      const menuBtn = document.getElementById('menu-btn');
-      const mobileMenu = document.getElementById('mobile-menu');
+        // Mobile Menu Logic
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
 
-      if (menuBtn && mobileMenu) {
-        menuBtn.addEventListener('click', () => {
-          mobileMenu.classList.toggle('active');
-        });
-
-        // Close menu when clicking a link
-        document.querySelectorAll('.mobile-menu-link').forEach(link => {
-          link.addEventListener('click', () => {
-            mobileMenu.classList.remove('active');
+        if (menuBtn && mobileMenu) {
+          menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
           });
-        });
-      }
+
+          // Close menu when clicking a link
+          document.querySelectorAll('.mobile-menu-link').forEach(link => {
+            link.addEventListener('click', () => {
+              mobileMenu.classList.remove('active');
+            });
+          });
+        }
       });
     </script>
 
